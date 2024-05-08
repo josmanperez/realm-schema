@@ -1,0 +1,24 @@
+{
+  "name": "realm-schema-dump",
+  "version": "1.0.0",
+  "description": "Project to create random documents out of Realm Schema",
+  "main": "cli.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node src/cli.ts"
+  },
+  "author": "Josman Pérez",
+  "license": "ISC",
+  "dependencies": {
+    "bson-ext": "^4.0.3",
+    "fs": "^0.0.1-security",
+    "typescript": "^5.4.5",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "@types/node": "^20.12.11",
+    "@types/yargs": "^17.0.32",
+    "ts-node": "^10.9.2"
+  }
+}
