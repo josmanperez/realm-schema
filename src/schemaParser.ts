@@ -6,7 +6,7 @@ import { Logger, LogType } from './Logger';
 export async function generateDataFromSchema(argv: any, nDocuments: number, writeToFile: boolean = false) {
   if (typeof argv.schema === 'string') {
     const schema = await readSchema(argv.schema);
-    const data = await generateData(schema);
+    const data = await generateData(schema, nDocuments);
     Logger.log(LogType.trace, EJSON.stringify(data));
     if (writeToFile) {
       fs.writeFileSync('output.json', EJSON.stringify(data, { relaxed: false }, 2));
@@ -53,7 +53,7 @@ function handleSwitch(data: any) {
     case 'array':
       return generateArrayData(data.items);
     case 'object':
-      return generateData(data);
+      return generateData(data)[0];
     case 'binData':
       return faker.number.binary();
     default:
@@ -68,7 +68,7 @@ function generateArrayData(itemSchema: any): any[] {
   // Check if the items in the array are of type 'object'
   if (itemSchema.bsonType === 'object') {
     for (let i = 0; i < arrayLength; i++) {
-      arrayData.push(generateData(itemSchema));
+      arrayData.push(generateData(itemSchema)[0]);
     }
   } else {
     // If the items are not objects, generate data based on their type
