@@ -7,11 +7,34 @@ export function readSchema(path: string) {
   return JSON.parse(schemaJson);
 }
 
-function generateStringData() {
-  return faker.string.alpha({ length: { min: 5, max: 5*100*Math.random() } });
+function generateString() {
+  return faker.string.alpha({ length: { min: 5, max: 10 } });
 }
 
-function generateArrayData(itemSchema: any) {
+function generateInt() {
+  return faker.number.int({ min: 4, max: 10 })
+}
+
+function handleSwitch(data: any) {
+  switch (data.bsonType) {
+    case 'objectId':
+      return new ObjectId();
+    case 'string':
+      return generateString();
+    case 'int':
+      return generateInt();
+    case 'bool':
+      return faker.datatype.boolean();
+    case 'array':
+      return generateArrayData(data.items);
+    case 'object':
+      return generateData(data);
+    default:
+      return null;
+  }
+}
+
+function generateArrayData(itemSchema: any): any[] {
   const arrayData = [];
   const arrayLength = faker.number.int({ min: 2, max: 10 });
 
@@ -23,22 +46,7 @@ function generateArrayData(itemSchema: any) {
   } else {
     // If the items are not objects, generate data based on their type
     for (let i = 0; i < arrayLength; i++) {
-      switch (itemSchema.bsonType) {
-        case 'objectId':
-          arrayData.push(new ObjectId());
-          break;
-        case 'string':
-          arrayData.push(generateStringData());
-          break;
-        case 'int':
-          arrayData.push(faker.number.int());
-          break;
-        case 'bool':
-          arrayData.push(faker.datatype.boolean());
-          break;
-        default:
-          arrayData.push(null);
-      }
+      arrayData.push(handleSwitch(itemSchema));
     }
   }
 
@@ -51,28 +59,7 @@ export function generateData(schema: any) {
   const data: { [key: string]: any } = {}; // Add type annotation to specify string keys and any values
   for (const key in schema.properties) {
     const property = schema.properties[key];
-    switch (property.bsonType) {
-      case 'objectId':
-        data[key] = new ObjectId();
-        break;
-      case 'string':
-        data[key] = generateStringData();
-        break;
-      case 'int':
-        data[key] = faker.number.int();
-        break;
-      case 'bool':
-        data[key] = faker.datatype.boolean();
-        break;
-      case 'array':
-        data[key] = generateArrayData(property.items);
-        break;
-      case 'object':
-        data[key] = generateData(property);
-        break;
-      default:
-        data[key] = null;
-    }
+    data[key] = handleSwitch(property);
   }
   return data;
 }
