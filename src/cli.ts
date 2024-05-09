@@ -4,8 +4,13 @@ import { readSchema, generateData } from './schemaParser';
 
 yargs(hideBin(process.argv))
   .command('generate [schema]', 'Generate data', (yargs) => {
-    return yargs.positional('schema', {
+    return yargs
+    .positional('schema', {
       describe: 'Path to the schema file',
+      type: 'string',
+    })
+    .option('uri', {
+      describe: 'MongoDB Atlas conection URI with username and password',
       type: 'string',
     });
   }, (argv) => {
@@ -14,6 +19,11 @@ yargs(hideBin(process.argv))
       const schema = readSchema(argv.schema);
       const data = generateData(schema);
       console.log(data);
+      if (argv.uri) {
+        console.log(`Connecting to MongoDB Atlas at ${argv.uri}`);
+      } else {
+        console.log('No connection URI provided');
+      }
     }
   })
   .help()
