@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { faker } from '@faker-js/faker';
-import { EJSON } from 'bson';
+import { EJSON, ObjectID } from 'bson';
 import { Logger, LogType } from './Logger';
 import { FileNameMustBeString, JsonParseError, PropertiesMissingParseError } from './customErrors';
 import { ObjectId } from 'mongodb';
@@ -46,7 +46,7 @@ function generateInt() {
 function handleSwitch(data: any) {
   switch (data.bsonType) {
     case 'objectId':
-      return new ObjectId();
+      return new ObjectID();
     case 'string':
       return generateString();
     case 'int':
