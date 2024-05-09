@@ -1,6 +1,7 @@
 import yargs, { CommandModule, Argv } from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { generateDataFromSchema } from './schemaParser';
+import { LogType, Logger } from './Logger';
 
 const command: CommandModule = {
   command: 'generate [schema]',
@@ -27,7 +28,11 @@ const command: CommandModule = {
     if (argv.uri) {
       console.log(`Connecting to MongoDB Atlas with URI: ${argv.uri}`);
     } else {
-      await generateDataFromSchema(argv, nDocuments, true);
+      try {
+        await generateDataFromSchema(argv, nDocuments, true);
+      } catch (error: any) {
+        Logger.log(LogType.error, error.message);
+      }
     }
   },
 };

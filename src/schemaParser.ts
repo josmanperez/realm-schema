@@ -2,7 +2,12 @@ import fs from 'fs';
 import { faker } from '@faker-js/faker';
 import { ObjectId, EJSON } from 'bson';
 import { Logger, LogType } from './Logger';
+import { JsonParseError, PropertiesMissingParseError } from './SchemDumpError';
 
+/**
+ * This function generates data from a schema.
+ * @throws {JsonParseError} When the JSON file can't be parsed.
+ */
 export async function generateDataFromSchema(argv: any, nDocuments: number, writeToFile: boolean = false) {
   if (typeof argv.schema === 'string') {
     const schema = await readSchema(argv.schema);
@@ -16,8 +21,16 @@ export async function generateDataFromSchema(argv: any, nDocuments: number, writ
 }
 
 export function readSchema(path: string) {
-  const schemaJson = fs.readFileSync(path, 'utf-8');
-  return JSON.parse(schemaJson);
+  try {
+    const schemaJson = fs.readFileSync(path, 'utf-8');
+    return JSON.parse(schemaJson);
+  } catch (error: any) {
+    if (error instanceof SyntaxError) {
+      throw new JsonParseError(`File can't be parsed as a JSON: ${error.message}`);
+    } else {
+      throw error;
+    }
+  }
 }
 
 function generateString() {
@@ -86,6 +99,7 @@ export function generateData(schema: any, nDocuments = 1) {
   const data: any[] = []; // Initialize data as an array
   for (let i = 0; i < nDocuments; i++) {
     const document: { [key: string]: any } = {}; // Create a new document for each iteration
+    if (!schema.properties) throw new PropertiesMissingParseError('Schema must have a properties root Object key');
     for (const key in schema.properties) {
       const property = schema.properties[key];
       document[key] = handleSwitch(property); // Generate data for each property in the schema
