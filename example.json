@@ -25,67 +25,6 @@
           }
         }
       }
-    },
-    "eventId": {
-      "bsonType": "objectId"
-    },
-    "location": {
-      "bsonType": "string"
-    },
-    "settings": {
-      "bsonType": "object",
-      "properties": {
-        "associateCustomQrData": {
-          "bsonType": "object",
-          "properties": {
-            "appliesTo": {
-              "bsonType": "array",
-              "items": {
-                "bsonType": "objectId"
-              }
-            },
-            "enabled": {
-              "bsonType": "bool"
-            }
-          }
-        },
-        "enableTicketAssigning": {
-          "bsonType": "bool"
-        }
-      }
-    },
-    "ticketTypes": {
-      "bsonType": "array",
-      "items": {
-        "bsonType": "object",
-        "properties": {
-          "_id": {
-            "bsonType": "objectId"
-          },
-          "deleted": {
-            "bsonType": "bool"
-          },
-          "description": {
-            "bsonType": "string"
-          },
-          "disabled": {
-            "bsonType": "bool"
-          },
-          "name": {
-            "bsonType": "string"
-          }
-        }
-      }
-    },
-    "timezone": {
-      "bsonType": "string"
-    },
-    "totalCapacity": {
-      "bsonType": "int"
-    },
-    "userId": {
-      "bsonType": "string"
     }
-  },
-  "title": "Events"
+  }
 }
