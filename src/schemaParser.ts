@@ -1,9 +1,8 @@
 import fs from 'fs';
 import { faker } from '@faker-js/faker';
-import { EJSON, ObjectID } from 'bson';
+import { EJSON, ObjectId } from 'bson';
 import { Logger, LogType } from './Logger';
 import { FileNameMustBeString, JsonParseError, PropertiesMissingParseError } from './customErrors';
-import { ObjectId } from 'mongodb';
 
 /**
  * This function generates data from a schema.
@@ -46,7 +45,7 @@ function generateInt() {
 function handleSwitch(data: any) {
   switch (data.bsonType) {
     case 'objectId':
-      return new ObjectID();
+      return new ObjectId();
     case 'string':
       return generateString();
     case 'int':
