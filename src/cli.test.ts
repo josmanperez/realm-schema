@@ -2,7 +2,6 @@ import path from 'path';
 import { generateDataFromSchema, readSchema, generateData } from './schemaParser';
 import fs from 'fs';
 import { ObjectId } from 'bson-ext';
-import exp from 'constants';
 
 describe('generateDataFromSchema', () => {
   let invalidFilePath: string;

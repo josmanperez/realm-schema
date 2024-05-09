@@ -1,8 +1,9 @@
 import fs from 'fs';
 import { faker } from '@faker-js/faker';
-import { ObjectId, EJSON } from 'bson';
+import { EJSON } from 'bson';
 import { Logger, LogType } from './Logger';
 import { FileNameMustBeString, JsonParseError, PropertiesMissingParseError } from './customErrors';
+import { ObjectId } from 'mongodb';
 
 /**
  * This function generates data from a schema.
@@ -100,7 +101,7 @@ export function generateData(schema: any, nDocuments = 1) {
   const data: any[] = []; // Initialize data as an array
   for (let i = 0; i < nDocuments; i++) {
     const document: { [key: string]: any } = {}; // Create a new document for each iteration
-    if (!schema.properties) throw new PropertiesMissingParseError('Schema must have a properties root Object key');
+    if (!schema.properties) throw new PropertiesMissingParseError('Schema must have a `properties` root object key');
     for (const key in schema.properties) {
       const property = schema.properties[key];
       document[key] = handleSwitch(property); // Generate data for each property in the schema
