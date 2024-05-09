@@ -25,10 +25,24 @@ function handleSwitch(data: any) {
       return generateInt();
     case 'bool':
       return faker.datatype.boolean();
+    case 'date':
+      return faker.date.anytime();
+    case 'double':
+      return faker.number.float({ min: 10, max: 100, multipleOf: 0.02 });
+    case 'long':
+      return faker.number.float(3);
+    case 'decimal':
+      return faker.number.int({ max: 100 });
+    case 'uuid':
+      return faker.string.uuid();
+    case 'timestamp': 
+      return new Date(faker.date.anytime()).getTime();
     case 'array':
       return generateArrayData(data.items);
     case 'object':
       return generateData(data);
+    case 'binData':
+      return faker.number.binary();
     default:
       return null;
   }

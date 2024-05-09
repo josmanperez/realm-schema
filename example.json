@@ -32,6 +32,12 @@
     "location": {
       "bsonType": "string"
     },
+    "timeAsDate": {
+      "bsonType": "date"
+    },
+    "timeAsTimestamp": {
+      "bsonType": "timestamp"
+    },
     "settings": {
       "bsonType": "object",
       "properties": {
