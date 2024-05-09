@@ -2,13 +2,13 @@ import fs from 'fs';
 import { faker } from '@faker-js/faker';
 import { ObjectId, EJSON } from 'bson';
 import { Logger, LogType } from './Logger';
-import { JsonParseError, PropertiesMissingParseError } from './SchemDumpError';
+import { FileNameMustBeString, JsonParseError, PropertiesMissingParseError } from './customErrors';
 
 /**
  * This function generates data from a schema.
  * @throws {JsonParseError} When the JSON file can't be parsed.
  */
-export async function generateDataFromSchema(argv: any, nDocuments: number, writeToFile: boolean = false) {
+export async function generateDataFromSchema(argv: any, nDocuments: number, writeToFile: boolean = false): Promise<{ data: any }>{
   if (typeof argv.schema === 'string') {
     const schema = await readSchema(argv.schema);
     const data = await generateData(schema, nDocuments);
@@ -18,6 +18,7 @@ export async function generateDataFromSchema(argv: any, nDocuments: number, writ
     }
     return { data };
   }
+  throw new FileNameMustBeString('argv.schema must be a string');
 }
 
 export function readSchema(path: string) {
