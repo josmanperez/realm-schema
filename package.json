@@ -1,11 +1,15 @@
 {
-  "name": "realm-schema-dump",
+  "name": "realm-schema",
   "version": "1.0.0",
   "description": "Project to create random documents out of Realm Schema",
-  "main": "cli.ts",
+  "main": "./src/cli.ts",
   "scripts": {
     "test": "jest",
-    "start": "ts-node src/cli.ts"
+    "start": "ts-node src/cli.ts",
+    "build": "tsc"
+  },
+  "bin": {
+    "realmschema": "./src/cli.js"
   },
   "author": "Josman Pérez",
   "license": "ISC",
