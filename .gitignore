@@ -1,5 +1,8 @@
 .DS_Store
 
+# Binary file
+realm-schema
+
 # Dependency directories
 node_modules/
 
