@@ -1,7 +1,7 @@
 {
   "name": "realm-schema",
   "version": "1.0.0",
-  "description": "Project to create random documents out of Realm Schema",
+  "description": "CLI tool to create random documents out of Realm Schema",
   "main": "./src/cli.ts",
   "scripts": {
     "test": "jest",
