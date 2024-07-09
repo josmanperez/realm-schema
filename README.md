@@ -8,12 +8,7 @@ The idea is that with a `json` file that defines an [App Services schema](https:
 
 ## Installation
 
-There are already two binary files compiled for Windows and MacOS Silicon in the `/bin` folder. 
-
-1. `realm-schema-generator` compiled with NodeJS 16 for Apple Silicon. 
-2. `realm-schema-generator.exe` compiled with NodeJS 16 for Microsoft Windows. 
-
-However, installing the application could be done by executing in the root folder:
+You need to install the packages dependencies by running: 
 
 ```bash
 npm install 
@@ -24,6 +19,27 @@ And executing it by running:
 ```bash
 npm run start
 ```
+
+However, you can create a binary file for MacOS Silicon or Windows to use it from your terminal by running the following command:
+
+* For Windows machines:
+
+```bash
+npm run build_win
+```
+
+* For MacOS Silicon 
+
+```bash
+npm run build_arm
+```
+
+This will generate a binary with NodeJS 16. If you need a different distribution you can use `pkg` to create one you need.
+
+The above command will generate a file in the `bin` directory with: 
+
+1. `realm-schema-generator` compiled with NodeJS 16 for Apple Silicon. 
+2. `realm-schema-generator.exe` compiled with NodeJS 16 for Microsoft Windows. 
 
 ## Usage
 
