@@ -1,12 +1,13 @@
 {
-  "name": "realm-schema",
+  "name": "realm-schema-generator",
   "version": "1.0.0",
-  "description": "CLI tool to create random documents out of Realm Schema",
+  "description": "CLI tool to create random documents out of a App Services Schema",
   "main": "./src/cli.ts",
   "scripts": {
     "test": "jest",
     "start": "ts-node src/cli.ts",
-    "build": "tsc"
+    "build_arm": "pkg . --targets node16-macos-arm64",
+    "build_win": "pkg . --targets node16-win-arm64"
   },
   "bin": {
     "realmschema": "./src/cli.js"

@@ -6,7 +6,7 @@ import { MongoDBClient } from './mongoClientAux';
 
 const command: CommandModule = {
   command: 'generate [schema]',
-  describe: 'Generate data',
+  describe: 'Generate data based on a `json` schema definition file',
   builder: (yargs: Argv) => {
     return yargs
       .positional('schema', {
