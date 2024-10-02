@@ -2,7 +2,7 @@
 
 ## Description
 
-This project facilitates the creation of dummies/random data based on an Atlas App Services schema. 
+This project facilitates the creation of dummy data based on an Atlas App Services schema. 
 
 The idea is that with a `json` file that defines an [App Services schema](https://www.mongodb.com/docs/atlas/app-services/schemas/), random data can be created to simulate example documents in a given collection. 
 
@@ -91,4 +91,4 @@ We welcome contributions from the community! If you have any ideas, bug fixes, o
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
