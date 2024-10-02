@@ -52,7 +52,7 @@ Once the application is running, you can specify the options and commands to gen
 --help     Show help                                                 [boolean]
 ```
 
-The `--help` options command will show how to use the tool and what parameters there are avaiable.
+The `--help` options command will show how to use the tool and what parameters there are available.
 
 ### Commands
 
